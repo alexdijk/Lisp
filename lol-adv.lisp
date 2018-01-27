@@ -1,18 +1,22 @@
 ;; Description of the wizards world
 (defparameter *nodes* '((living-room (you are in the living room. a wizard is snoring loudly on the couch.))
                         (garden (you are in the garden. there is a well in front of you.))
+			(field (you are in a beautifull field. there are cows grazing. it is bordered by a fence))
                         (attic (you are in the attic. there is a giant welding torch in the corner.))))
 
 (defparameter *edges* '((living-room (garden west door)
                          (attic upstairs ladder))
-                        (garden (living-room east door))
+                        (garden (living-room east door)
+				(field north gate))
+			(field (garden south gate))
                         (attic (living-room downstairs ladder))))
 
-(defparameter *objects* '(whiskey bucket frog chain))
+(defparameter *objects* '(whiskey bucket frog chain goldbar))
 
 (defparameter *object-locations* '((whiskey living-room)
                                    (bucket living-room)
                                    (chain garden)
+				   (goldbar field)
                                    (frog garden)))
 
 (defparameter *location* 'living-room)
