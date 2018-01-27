@@ -1,6 +1,13 @@
-(defparameter *peg-rack* '((peg-a (1 2 3))
+;;
+;; solution to tower of hanoi problem with variable number of disks
+;;
+(defparameter *peg-rack* '((peg-a ())
                            (peg-b ())
                            (peg-c ())))
+
+(defun fill-rack (n)
+  (loop as i from n downto 1
+        do (push i (cadr (assoc 'peg-a *peg-rack*)))))
 
 (defparameter *nm* 0)
 
@@ -16,7 +23,7 @@
   (length (get-lst peg)))
 
 (defun print-towers ()
-  (format t "~10:a ~10:a ~10:a~%"
+  (format t "~20:a ~20:a ~20:a~%"
           (get-lst 'peg-a)
           (get-lst 'peg-b)
           (get-lst 'peg-c)))
@@ -25,12 +32,12 @@
   (if (equalp disk 1)
       (move-disk src dst)
       (progn
-        (move-tower (decf disk) src aux dst)
+        (move-tower (1- disk) src aux dst)
         (move-disk src dst)
-        (move-tower (decf disk) aux dst src))))
+        (move-tower (1- disk) aux dst src))))
 
-(defun solve ()
+(defun solve (n)
+  (fill-rack n)
   (print-towers)
-  (time (move-tower (get-len 'peg-a) 'peg-a 'peg-c 'peg-b))
-  (format t "Number of moves: ~D~%" *nm*))
-
+  (move-tower (get-len 'peg-a) 'peg-a 'peg-c 'peg-b)
+  (format t "~%# of moves: ~D~%" *nm*))
