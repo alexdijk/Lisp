@@ -1,3 +1,5 @@
+;; database app / from practical common Lisp
+
 (defvar *db* nil)
 
 (defun make-cd (title artist rating ripped)
