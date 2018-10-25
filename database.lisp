@@ -60,3 +60,5 @@
              row) *db*)))
 
 
+(defun empty-fn ()
+  ())
